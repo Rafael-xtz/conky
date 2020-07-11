@@ -1,0 +1,181 @@
+# Use Xft?
+use_xft yes
+xftfont ubuntu:size=8
+xftalpha 0.8
+text_buffer_size 2048
+
+# Update interval in seconds
+update_interval 1.5
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_type dock
+own_window_argb_visual yes
+own_window_argb_value 200
+own_window_transparent yes
+#own_window_hints above
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_colour 000000
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+minimum_size 240 1024
+maximum_width 260
+
+# Draw shades?
+draw_shades no
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around text
+draw_borders no
+
+# Stippled borders?
+stippled_borders 0
+
+# border margins
+border_inner_margin 5
+
+# border width
+border_width 1
+draw_graph_borders yes
+
+default_color white
+#default_shade_color black
+#default_outline_color white
+
+# Text alignment, other possible values are commented
+alignment top_left
+#alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 4
+gap_y 0
+
+# Subtract file system bconkyuffers from used memory?
+no_buffers yes
+
+# set to yes if you want all text to be in uppercase
+uppercase yes
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+if_up_strictness address
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+use_spacer no
+short_units yes
+pad_percents 2
+imlib_cache_size 0
+
+top_name_width 10
+
+# Color Title.
+color0 ffffff
+#cinza
+color1 C0C0C0
+#azul
+color2 0000FF 
+#verde
+color3 32CD19
+#vermelho
+color6 ff0000
+#amarelo
+color7 FFFF00
+
+
+TEXT
+${voffset 0}$color3${font Alien Encounters:size=10}Data${voffset -2} ${hr} 
+${voffset 0}${font Digital Readout Thick Upright:size=50}$color1${alignc 10}${time %H:%M:%S}${font}
+${voffset 5}${font Monospace:size=9}${color1}${execpi 300 DJS=`date +%_d`; ncal -b -h|sed '1,8!d'| sed '/./!d' | sed 's/^/${goto 50 } /'| sed 's/$/ /' | sed 's/^/ /' | sed /" $DJS "/s/" $DJS "/" "'${font Monospace=Bold:size=9}${voffset -1}${color red} '"$DJS"'${color1}${font Monospace:size=9}'" "/}
+${voffset -5}${color3}${font Alien Encounters:size=10}Sistema${voffset -2}$color3 ${hr} 
+#modelo processador
+${voffset 35}$color1${font ConkySymbols:size=14}f
+${voffset -65}${GOTO 20}$font ${font : size=8}$color1   ${execi 4 head -n 20 /proc/cpuinfo | grep -A 0 'model name' | cut -c14-60} ${font}
+#processadores
+${voffset 0}${goto 40}CPU${color1}${goto 80}$color7[ ${color3}$freq_g GHz $color7]${voffset -1}$color3${alignr 10}${cpubar cpu0 5,80}
+#por nucleo
+#nucleo 1 e 3
+${voffset 0} ${goto 50}${color1}CORE 1  = ${cpu cpu1}%${goto 185}CORE 3 = ${cpu cpu3}%
+${goto 40}$color3${cpubar cpu1 5, 80}${alignr 10}${cpubar cpu3 5, 80}
+#nucleo 2 e 4
+${voffset -2} ${goto 50}${color1}CORE 2 = ${cpu cpu2}%${goto 185}CORE 4 = ${cpu cpu4}%
+${goto 40}$color3${cpubar cpu2 5, 80}${alignr 10}${cpubar cpu4 5, 80}
+#memoria e swap
+${voffset 5}${font ConkySymbols:size=12}${color1}j${font}
+${voffset -25}${color1}${goto 40}RAM:${goto 90}${color3}$mem${color1}${goto 130}/ $memmax $color3 ${voffset -1}${alignr 10}${membar 5,80  aa0036 ff5500}
+#${memgraph 15,80  aa0036 ff5500}
+${voffset 5}${goto 40}${color1}SWAP:${goto 90}${color3} $swap${color1}${goto 130}/  $swapmax ${color3} ${voffset -1}${alignr 10}${swapbar 5,80 aa0036 ff5500}${font}
+#processsos
+${voffset 5}${color3}${font Alien Encounters:size=10}processsos${font}${voffset -2}$color3 $hr 
+${voffset 4}${GOTO 40}${color1}Nome${goto 186}CPU ${goto 228}MEM
+${GOTO 40}${color3}${top name 1} ${goto 180}${top cpu 1} ${goto 225}${top mem 1}
+${GOTO 40}${color3}${top name 2} ${goto 180}${top cpu 2} ${goto 225}${top mem 2}
+${GOTO 40}${color3}${top name 3} ${goto 180}${top cpu 3} ${goto 225}${top mem 3}
+${GOTO 40}${color3}${top name 4} ${goto 180}${top cpu 4} ${goto 225}${top mem 4}
+${GOTO 40}${color3}${top name 5} ${goto 180}${top cpu 5} ${goto 225}${top mem 5}
+#${GOTO 40}${color3}${top name 6} ${goto 180}${top cpu 6} ${goto 225}${top mem 6}
+#${GOTO 40}${color3}${top name 7} ${goto 180}${top cpu 7} ${goto 225}${top mem 7}
+#${GOTO 40}${color3}${top name 8} ${goto 180}${top cpu 8} ${goto 225}${top mem 8}
+#saude
+${voffset 5}${color3}${font Alien Encounters:size=10}SAUDE${voffset -2}$color3 $hr 
+${voffset 15}${color1}${font ConkySymbols:size=12}h${font}
+${voffset -30}${goto 40}${color1}CPU:${color3}${GOTO 210}${execi 4 sensors | grep "Core 0" | cut -d "+" -f2 | cut -c1-5,5}${alignr 18}${color1}ºC
+${goto 40}${color1}GPU Intel:${color3}${GOTO 210}${execi 4 sensors | grep "Core 1" | cut -d "+" -f2 | cut -c1-5,5}${alignr 18}${color1}ºC
+#${GOTO 40}${color1}HD:${goto 220}${color3}${execi 4 sensors | grep -A temp2 | cut -c16-19}${alignr 18}${color1}ºC
+#energia
+${voffset 5}${color3}${font Alien Encounters:size=10}Energia ${voffset -2}$hr${font}
+${voffset 5}${goto 40}${color1}STATUS${goto 90}[ ${color3}${acpiacadapter ACAD}${color1} ]${voffset -5}${goto 190}${font ConkySymbols:size=12}h$font${voffset -3}${goto 218}$color3${acpitemp}${color1}${alignr 18}ºC
+${goto 50}${voffset 5}${font Poky:size=12}3$font${goto 90}${voffset -5}[ $color3${battery BAT1} $color1 $color6${color6}${battery_time BAT1}${color1} ]
+#rede
+${if_gw}
+${voffset -10}${color3}${font Alien Encounters:size=10}REDE ${voffset -2}$hr${font}
+${voffset 4}${goto 40}${color1}HOST:${color3}${goto 80}${gw_ip} ${alignr 18} ${color1}IP:${color3}${goto 185}${addr wlp2s0}
+${if_up wlp2s0} 
+${voffset -10}${GOTO 40}${color1}REDE:${goto 80}${color3}${wireless_essid}
+${goto 40}${color1}SINAL:${goto 80}${color3}${wireless_link_qual_perc wlp2s0}${alignr 10}${wireless_link_bar 5,80 wlp2s0}
+#upspeed
+${voffset 10}${goto 40}${color1}Up:${voffset -8}${goto 80}${color3}${upspeed wlp2s0}${voffset 14}${goto 80}$color7}${color7}[${color3}${totalup wlp2s0}$color7} ]${color0}${voffset -14}${alignr 10}${color3}${upspeedgraph wlp2s0 20, 120 4b0082 ff00ff 0.5 -t -l}
+#20,120 884400 995500 -l}
+${voffset 10}${goto 40}${color1}Dn:${voffset -8}${goto 80}${color3}${downspeed wlp2s0}${voffset 14}${goto 80}$color7}${color7}[${color3}${totaldown wlp2s0}$color7} ]${color0}${voffset -14}${alignr 10}${color3}${downspeedgraph wlp2s0 20,120 884400 995500 -T -l}
+${endif}
+#rede USB
+${if_up enp0s20f0u1} 
+#upspeed
+${voffset 10}${goto 40}${color1}Up:${voffset -8}${goto 80}${color3}${upspeed enp0s20f0u1}${voffset 14}${goto 80}$color7}${color7}[${color3}${totalup enp0s20f0u1}$color7} ]${color0}${voffset -14}${alignr 10}${color3}${upspeedgraph enp0s20f0u1 20, 120 4b0082 ff00ff 0.5 -t -l}
+#20,120 884400 995500 -l}
+${voffset 10}${goto 40}${color1}Dn:${voffset -8}${goto 80}${color3}${downspeed enp0s20f0u1}${voffset 14}${goto 80}$color7}${color7}[${color3}${totaldown enp0s20f0u1}$color7} ]${color0}${voffset -14}${alignr 10}${color3}${downspeedgraph enp0s20f0u1 20,120 884400 995500 -T -l}
+${endif}
+${endif}
+#
+${if_up eth0} 
+${gw_ip eth0} 
+#upspeed
+${voffset 10}${goto 40}${color1}Up:${voffset -8}${goto 80}${color3}${upspeed eth0}${voffset 14}${goto 80}$color7}${color7}[${color3}${totalup enp0s20f0u1}$color7} ]${color0}${voffset -14}${alignr 10}${color3}${upspeedgraph eth0 20, 120 4b0082 ff00ff 0.5 -t -l}
+#20,120 884400 995500 -l}
+${voffset 10}${goto 40}${color1}Dn:${voffset -8}${goto 80}${color3}${downspeed eth0}${voffset 14}${goto 80}$color7}${color7}[${color3}${totaldown enp0s20f0u1}$color7} ]${color0}${voffset -14}${alignr 10}${color3}${downspeedgraph eth0 20,120 884400 995500 -T -l}
+${endif}
+#
+#discos
+${voffset -50}${color3}${font Alien Encounters:size=10}Discos ${voffset -2}$hr${font}
+${voffset 6}${GOTO 40}$color1${voffset -5}Raiz: ${fs_size /}
+${GOTO 40}Used ${color3}${fs_used /}${color1} / Free ${color3}${fs_free /} ${alignr 10}${fs_bar 5,80 /}
+${voffset 4}${color1}${goto 40}Home: ${fs_size /home}
+${GOTO 40}${color1}Used ${color3}${fs_used /home}${color1} / Free ${color3}${fs_free /home} ${alignr 10}${fs_bar 5,80 /home}${color1}
+${GOTO 40}Disk I/O $alignr ${diskio}
+${GOTO 40}${color3}${diskiograph 16,220 aa0000 ff5500 ffff00}
